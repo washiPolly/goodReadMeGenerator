@@ -1,37 +1,30 @@
 const axios = require("axios");
+//const index = require("../index");
+
 var rtnUsername; //I added this here to test if the variable isn't coming up because it wasn't global
+var email;
 
 // console.log(`${username}`);
 
-function runApi(username){
+function runApi(username, cb){
     //var username = "washiPolly";
     const queryUrl = `https://api.github.com/users/${username}`;
 
     axios.get(queryUrl).then(function(res) {
       const usernameURL = res.data.html_url
       //console.log(usernameURL);
-      
+      cb(res.data);
       var rtnUsername =  res.data.login
       
       
       //module.exports.rtnUsername = rtnUsername;
       //console.log(rtnUsername);
       // const avatar = res.data.avatar_url;
-      // const email = res.data.email;
-      // const title = res.data.title;
-      // const description = res.data.description;
-      // const tableOfContents = res.data.tableOfContents;
-      // const installation = res.data.installation;
-      // const usage = res.data.usage;
-      // const license = res.data.license;
-      // const badges = res.data.badges;
-      // const contributing = res.data.contributing;
-      // const tests = res.data.tests;
+      email = res.data.email;
+      
 
       
-      module.exports = { runApi, rtnUsername };
-      console.log(rtnUsername)
-
+      
   });
 
 };
@@ -47,8 +40,6 @@ function runApi(username){
 // }
 // console.log(api())
 //api();
-runApi();
+//runApi();
 module.exports = runApi;
 
-module.exports = rtnUsername;
-     console.log(rtnUsername);
